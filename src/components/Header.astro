@@ -1,0 +1,83 @@
+---
+const links = [
+  { href: '#works', label: 'Роботи' },
+  { href: '#about', label: 'Про мене' },
+  { href: '#contacts', label: 'Контакти' },
+];
+---
+
+<header class="header">
+  <a class="header__logo" href="/">Олеся Стецюх</a>
+  <div class="header__right">
+    <nav class="header__nav" aria-label="Основна навігація">
+      {links.map((link) => <a href={link.href}>{link.label}</a>)}
+    </nav>
+    <a class="btn header__cta" href="#contacts">Написати</a>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    height: 48px;
+    margin-top: 24px;
+    padding-inline: var(--page-gutter);
+  }
+
+  .header__logo {
+    font-size: 20px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+
+  .header__right {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+  }
+
+  .header__nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    font-size: 14px;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .header__nav a:hover {
+    text-decoration: underline;
+    text-underline-offset: 6px;
+  }
+
+  .header__cta {
+    width: 126px;
+  }
+
+  @media (max-width: 900px) {
+    .header__right {
+      gap: 24px;
+    }
+    .header__nav {
+      gap: 20px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .header__nav {
+      display: none;
+    }
+    .header__logo {
+      font-size: 16px;
+    }
+    .header__cta {
+      width: auto;
+    }
+  }
+</style>

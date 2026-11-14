@@ -1,0 +1,27 @@
+---
+import '@fontsource-variable/unbounded';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Олеся Стецюх — UI-дизайнерка',
+  description = 'Допоможу стартапам і малому бізнесу пройти шлях від ідеї до готових UI-екранів у Figma — разом, крок за кроком.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

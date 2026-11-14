@@ -1,0 +1,106 @@
+/* Кольори та шрифт з макета Figma (Portfolio → Portfolio Landing Page) */
+:root {
+  --color-ink: #000;
+  --color-bg: #fff;
+  --color-pink: #f8c2c8;
+  --color-pink-dark: #d19ca2;
+  --color-cream: #fbf5d8;
+
+  --font-main: 'Unbounded Variable', 'Unbounded', system-ui, sans-serif;
+
+  /* Поля сторінки: 60px на десктопі, 16px на телефоні */
+  --page-gutter: 60px;
+}
+
+@media (max-width: 720px) {
+  :root {
+    --page-gutter: 16px;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-main);
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+  max-width: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Кнопки з макета: рожеві плашки з радіусом 2px */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 2px;
+  background: var(--color-pink);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: normal;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+  background: var(--color-pink-dark);
+}
+
+.btn--dark {
+  background: var(--color-pink-dark);
+}
+
+.btn--dark:hover {
+  background: var(--color-pink);
+}
+
+.btn__icon {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.2s ease;
+}
+
+.btn:hover .btn__icon {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn__icon {
+    transition: none;
+  }
+}

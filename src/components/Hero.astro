@@ -1,0 +1,417 @@
+---
+// Перший екран головної сторінки. Макет: Figma → Portfolio → node 22:1223 (1920×1080).
+import { Image } from 'astro:assets';
+import Header from './Header.astro';
+import portrait from '../assets/portrait.png';
+import { socials } from '../data/contacts';
+
+const processSteps = [
+  'UI/UX',
+  'Research',
+  'User flow',
+  'CJM',
+  'Wireframe',
+  'Adaptive design',
+  'Prototyping',
+];
+
+// Вертикальні позиції іконок у socials.svg (42×220): 0, 89, 178.
+const socialOffsets = [0, 89, 178];
+---
+
+<section class="first-screen">
+  <div class="first-screen__bg" aria-hidden="true">
+    <img class="bg-ellipse bg-ellipse--left" src="/figma/ellipse-left.svg" alt="" />
+    <img class="bg-ellipse bg-ellipse--top" src="/figma/ellipse-top.svg" alt="" />
+    <img class="bg-ellipse bg-ellipse--right" src="/figma/ellipse-right.svg" alt="" />
+  </div>
+
+  <Header />
+
+  <div class="hero">
+    <div class="hero__intro">
+      <div class="hero__copy">
+        <p class="hero__eyebrow">UI-дизайнерка · Figma</p>
+        <h1 class="hero__title">Від ідеї<br />до екранів<br />разом.</h1>
+        <p class="hero__lead">
+          Допоможу стартапам і малому бізнесу пройти шлях від ідеї до готових UI-екранів у Figma — разом,
+          крок за кроком.
+        </p>
+      </div>
+      <div class="hero__actions">
+        <a class="btn btn--dark" href="#works">
+          Переглянути роботи
+          <img class="btn__icon" src="/figma/arrow-right.svg" alt="" width="32" height="32" />
+        </a>
+        <a class="btn" href="#contacts">
+          Написати мені
+          <img class="btn__icon" src="/figma/arrow-right.svg" alt="" width="32" height="32" />
+        </a>
+      </div>
+    </div>
+
+    <div class="hero__art-col">
+      <div class="art">
+        <img class="art__circle" src="/figma/ellipse-portrait.svg" alt="" aria-hidden="true" />
+        <Image
+          class="art__portrait"
+          src={portrait}
+          alt="Олеся Стецюх"
+          widths={[485, 970]}
+          sizes="(max-width: 1100px) 60vw, 485px"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <div class="art__question" aria-hidden="true">
+          <img src="/figma/question.svg" alt="" />
+        </div>
+        <div class="art__exclamation" aria-hidden="true">
+          <img src="/figma/exclamation.svg" alt="" />
+        </div>
+        <img class="art__burst" src="/figma/burst.svg" alt="" aria-hidden="true" />
+        <p class="art__burst-text">Нічого складного, лише робочі рішення!</p>
+      </div>
+
+      <div class="socials">
+        <img src="/figma/socials.svg" alt="" width="42" height="220" aria-hidden="true" />
+        {
+          socials.map((s, i) =>
+            s.href ? (
+              <a
+                class="socials__hit"
+                style={`top:${socialOffsets[i]}px`}
+                href={s.href}
+                target="_blank"
+                rel="noopener"
+              >
+                <span class="visually-hidden">{s.name}</span>
+              </a>
+            ) : (
+              <span class="visually-hidden">{s.name}</span>
+            )
+          )
+        }
+      </div>
+    </div>
+  </div>
+
+  <ul class="process" aria-label="Що я роблю">
+    <li class="process__dot" aria-hidden="true">•</li>
+    {
+      processSteps.map((step) => (
+        <>
+          <li class="process__step">{step}</li>
+          <li class="process__dot" aria-hidden="true">•</li>
+        </>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .first-screen {
+    /* 1 одиниця макета 1920px — для фонових кіл */
+    --u: calc(100vw / 1920);
+    /* Масштаб ілюстрації з фото: 1px на 1920, менше на вужчих екранах */
+    --a: min(1px, max(0.45px, calc((100vw - 820px) / 712)));
+
+    position: relative;
+    overflow: hidden;
+    padding-bottom: max(48px, calc(235 * var(--u)));
+  }
+
+  /* ---------- Фонові кола ---------- */
+  .first-screen__bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .bg-ellipse {
+    position: absolute;
+  }
+
+  .bg-ellipse--left {
+    left: calc(-222 * var(--u));
+    top: calc(-51 * var(--u));
+    width: calc(1000 * var(--u));
+    height: calc(1008 * var(--u));
+  }
+
+  .bg-ellipse--top {
+    left: calc(635 * var(--u));
+    top: calc(-568 * var(--u));
+    width: calc(740 * var(--u));
+    height: calc(760 * var(--u));
+  }
+
+  .bg-ellipse--right {
+    left: calc(1005 * var(--u));
+    top: calc(115 * var(--u));
+    width: calc(941 * var(--u));
+    height: calc(941 * var(--u));
+  }
+
+  /* ---------- Основний ряд ---------- */
+  /* .hero навмисно без position: іконки месенджерів на десктопі
+     позиціонуються від усього першого екрана, як у макеті */
+  .hero {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: calc(1496px + 2 * var(--page-gutter));
+    margin: 81px auto 0;
+    padding-inline: var(--page-gutter);
+  }
+
+  .hero__intro {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 96px;
+    width: 566px;
+    flex-shrink: 0;
+  }
+
+  .hero__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    max-width: 495px;
+  }
+
+  .hero__eyebrow {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .hero__title {
+    margin: 0;
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 64px;
+  }
+
+  .hero__lead {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 28px;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px;
+  }
+
+  /* ---------- Ілюстрація: коло, фото, «?!», вибух ---------- */
+  .hero__art-col {
+    flex-shrink: 0;
+  }
+
+  .art {
+    position: relative;
+    width: calc(712 * var(--a));
+    height: calc(587 * var(--a));
+  }
+
+  .art > * {
+    position: absolute;
+  }
+
+  .art__circle {
+    left: calc(124.93 * var(--a));
+    top: 0;
+    width: calc(587 * var(--a));
+    height: calc(587 * var(--a));
+  }
+
+  .art__portrait {
+    left: 0;
+    top: calc(50.94 * var(--a));
+    width: calc(485 * var(--a));
+    height: calc(536 * var(--a));
+    border-radius: calc(34 * var(--a));
+    object-fit: cover;
+    object-position: top;
+  }
+
+  .art__question,
+  .art__exclamation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .art__question {
+    left: calc(338.98 * var(--a));
+    top: calc(-57.96 * var(--a));
+    width: calc(279.16 * var(--a));
+    height: calc(315.2 * var(--a));
+  }
+
+  .art__question img {
+    flex: none;
+    width: calc(218.495 * var(--a));
+    height: calc(268.812 * var(--a));
+    transform: rotate(-14.59deg);
+  }
+
+  .art__exclamation {
+    left: calc(483.9 * var(--a));
+    top: calc(25 * var(--a));
+    width: calc(180.3 * var(--a));
+    height: calc(274.8 * var(--a));
+  }
+
+  .art__exclamation img {
+    flex: none;
+    width: calc(146.856 * var(--a));
+    height: calc(257.421 * var(--a));
+    transform: rotate(7.75deg);
+  }
+
+  .art__burst {
+    left: calc(-249 * var(--a));
+    top: calc(380 * var(--a));
+    width: calc(367.5 * var(--a));
+    height: calc(271.5 * var(--a));
+  }
+
+  .art__burst-text {
+    left: calc(-185 * var(--a));
+    top: calc(472 * var(--a));
+    width: calc(213 * var(--a));
+    margin: 0;
+    font-size: max(10px, calc(20 * var(--a)));
+    font-weight: 600;
+    line-height: max(13px, calc(28 * var(--a)));
+    text-align: center;
+  }
+
+  /* ---------- Іконки месенджерів ---------- */
+  .socials {
+    position: absolute;
+    z-index: 1;
+    right: var(--page-gutter);
+    top: 343px;
+    width: 42px;
+    height: 220px;
+  }
+
+  .socials__hit {
+    position: absolute;
+    left: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+  }
+
+  .socials__hit:hover {
+    background: rgb(255 255 255 / 0.2);
+  }
+
+  /* ---------- Рядок навичок ---------- */
+  .process {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    margin: 85px 0 0;
+    padding: 0 calc(2 * var(--page-gutter));
+    list-style: none;
+    text-transform: uppercase;
+  }
+
+  .process__dot {
+    font-size: 18px;
+    font-weight: 300;
+  }
+
+  .process__step {
+    font-size: 16px;
+    font-weight: 400;
+    white-space: nowrap;
+  }
+
+  /* Ноутбуки: залишаємо справа місце під іконки месенджерів */
+  @media (min-width: 1101px) and (max-width: 1800px) {
+    .first-screen {
+      --a: min(1px, max(0.45px, calc((100vw - 900px) / 712)));
+    }
+    .hero {
+      padding-right: calc(var(--page-gutter) + 82px);
+    }
+  }
+
+  /* ---------- Планшет і телефон: колонка ---------- */
+  @media (max-width: 1100px) {
+    .first-screen {
+      --a: min(0.9px, calc((100vw - 2 * var(--page-gutter) - 58px) / 961));
+    }
+
+    .hero {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 48px;
+      margin-top: 48px;
+    }
+
+    .hero__intro {
+      width: auto;
+      max-width: 566px;
+      gap: 48px;
+    }
+
+    .hero__art-col {
+      position: relative;
+      align-self: center;
+      padding-right: 58px;
+    }
+
+    .art {
+      margin-left: calc(249 * var(--a));
+      margin-top: calc(58 * var(--a));
+    }
+
+    .socials {
+      right: 0;
+      top: calc(58 * var(--a));
+    }
+
+    .process {
+      justify-content: center;
+      margin-top: 56px;
+      padding-inline: var(--page-gutter);
+    }
+
+    .process__step {
+      font-size: 14px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero__title {
+      font-size: 40px;
+      line-height: 44px;
+    }
+
+    .hero__lead {
+      font-size: 16px;
+      line-height: 24px;
+    }
+
+    .hero__actions {
+      gap: 12px;
+    }
+  }
+</style>

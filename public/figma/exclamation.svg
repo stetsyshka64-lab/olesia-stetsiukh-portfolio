@@ -1,0 +1,21 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="146.856" height="257.421" viewBox="0 0 146.856 257.421" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Group 10">
+<g id="Vector">
+<use xlink:href="#stroke0_0_18" fill="#FF5A79"/>
+<mask id="stroke1_0_18" fill="white">
+<use xlink:href="#stroke0_0_18"/>
+</mask>
+<path d="M69.6257 229.276C62.6693 244.82 44.2634 251.707 28.515 244.659C12.7666 237.612 5.6393 219.297 12.5957 203.753C19.5521 188.209 37.958 181.322 53.7064 188.37C69.4548 195.418 76.5822 213.732 69.6257 229.276Z" stroke-width="4" stroke="black" mask="url(#stroke1_0_18)"/>
+</g>
+<g id="Vector_2">
+<path d="M34.6479 158.694L72.4765 173.359L146.856 26.3978L78.7649 1.75798e-06L34.6479 158.694Z" fill="#FF5A79"/>
+<mask id="stroke2_0_18" fill="white">
+<path d="M34.6479 158.694L72.4765 173.359L146.856 26.3978L78.7649 1.75798e-06L34.6479 158.694Z"/>
+</mask>
+<path d="M34.6479 158.694L72.4765 173.359L146.856 26.3978L78.7649 1.75798e-06L34.6479 158.694Z" stroke-width="4" stroke="black" mask="url(#stroke2_0_18)"/>
+</g>
+</g>
+<defs>
+<path id="stroke0_0_18" d="M28.515 244.659C44.2634 251.707 62.6693 244.82 69.6257 229.276C76.5822 213.732 69.4548 195.418 53.7064 188.37C37.958 181.322 19.5521 188.209 12.5957 203.753C5.6393 219.297 12.7666 237.612 28.515 244.659Z"/>
+</defs>
+</svg>
