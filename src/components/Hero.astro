@@ -344,7 +344,9 @@ const processSteps = [
   /* Ноутбуки: залишаємо справа місце під іконки месенджерів */
   @media (min-width: 1101px) and (max-width: 1800px) {
     .first-screen {
-      --a: min(1px, max(0.45px, calc((100vw - 900px) / 712)));
+      /* Ширина ряду = min(100vw, 1616) − 202; віднімаємо текст (566) і запас 40px,
+         ділимо на 961 (ілюстрація 712 + вибух, що виступає вліво на 249) */
+      --a: min(1px, max(0.3px, calc((min(100vw, 1616px) - 808px) / 961)));
     }
     .hero {
       padding-right: calc(var(--page-gutter) + 82px);
