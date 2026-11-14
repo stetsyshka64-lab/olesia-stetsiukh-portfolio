@@ -76,7 +76,7 @@ const processSteps = [
             s.href ? (
               <a
                 class="socials__hit"
-                style={`top:${s.top}px`}
+                style={`--t:${s.top}`}
                 href={s.href}
                 target={s.href.startsWith('http') ? '_blank' : undefined}
                 rel={s.href.startsWith('http') ? 'noopener' : undefined}
@@ -305,6 +305,7 @@ const processSteps = [
   .socials__hit {
     position: absolute;
     left: 0;
+    top: calc(var(--t) * 1px);
     width: 42px;
     height: 42px;
     border-radius: 50%;
@@ -341,15 +342,76 @@ const processSteps = [
     white-space: nowrap;
   }
 
-  /* Ноутбуки: залишаємо справа місце під іконки месенджерів */
-  @media (min-width: 1101px) and (max-width: 1800px) {
+  /* Від 1920 і вужче (до 1101) весь перший екран масштабується пропорційно
+     макету: --k = ширина вікна / 1920. Жодних стрибків на 1800/1801. */
+  @media (min-width: 1101px) and (max-width: 1920px) {
     .first-screen {
-      /* Ширина ряду = min(100vw, 1616) − 202; віднімаємо текст (566) і запас 40px,
-         ділимо на 961 (ілюстрація 712 + вибух, що виступає вліво на 249) */
-      --a: min(1px, max(0.3px, calc((min(100vw, 1616px) - 808px) / 961)));
+      --k: calc(100vw / 1920);
+      --a: var(--k);
+      /* жовті кола не зменшуємо нижче 0.72 від макета */
+      --u: max(calc(100vw / 1920), 0.72px);
     }
+
     .hero {
-      padding-right: calc(var(--page-gutter) + 82px);
+      max-width: calc(1496 * var(--k) + 2 * var(--page-gutter));
+      margin-top: calc(81 * var(--k));
+    }
+
+    .hero__intro {
+      width: calc(566 * var(--k));
+      gap: calc(96 * var(--k));
+    }
+
+    .hero__copy {
+      gap: calc(32 * var(--k));
+      max-width: calc(495 * var(--k));
+    }
+
+    .hero__eyebrow {
+      font-size: max(12px, calc(16 * var(--k)));
+    }
+
+    .hero__title {
+      font-size: max(40px, calc(64 * var(--k)));
+      line-height: max(44px, calc(64 * var(--k)));
+    }
+
+    .hero__lead {
+      font-size: max(14px, calc(18 * var(--k)));
+      line-height: max(21px, calc(28 * var(--k)));
+    }
+
+    /* кнопки масштабуються разом з колонкою й не виходять за її межі */
+    .hero__actions {
+      gap: max(10px, calc(24 * var(--k)));
+    }
+
+    .hero__actions .btn {
+      gap: max(6px, calc(12 * var(--k)));
+      padding: max(8px, calc(12 * var(--k)));
+      font-size: max(12px, calc(14 * var(--k)));
+    }
+
+    .hero__actions .btn__icon {
+      width: max(20px, calc(32 * var(--k)));
+      height: max(20px, calc(32 * var(--k)));
+    }
+
+    .socials {
+      top: calc(262 * var(--k));
+      width: calc(42 * var(--k));
+      height: calc(332 * var(--k));
+    }
+
+    .socials > img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .socials__hit {
+      width: calc(42 * var(--k));
+      height: calc(42 * var(--k));
+      top: calc(var(--t) * var(--k));
     }
   }
 
