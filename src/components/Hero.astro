@@ -31,8 +31,9 @@ const processSteps = [
         <p class="hero__eyebrow">UI-дизайнерка · Figma</p>
         <h1 class="hero__title">Від ідеї<br />до екранів<br />разом.</h1>
         <p class="hero__lead">
-          Допоможу стартапам і малому бізнесу пройти шлях від ідеї до готових UI-екранів у Figma — разом,
-          крок за кроком.
+          Допоможу стартапам і малому бізнесу пройти шлях від ідеї до готових UI-екранів у Figma —<br
+            class="lead-br"
+          /> разом, крок за кроком.
         </p>
       </div>
       <div class="hero__actions">
@@ -101,6 +102,26 @@ const processSteps = [
           <li class="process__step">{step}</li>
           <li class="process__dot" aria-hidden="true">•</li>
         </>
+      ))
+    }
+  </ul>
+
+  <!-- Горизонтальний ряд соцмереж під рядком навичок (показується лише на 768–1022px) -->
+  <ul class="socials-row" aria-label="Месенджери й соцмережі">
+    {
+      socials.map((s) => (
+        <li>
+          <a
+            class="socials-row__link"
+            href={s.href || undefined}
+            target={s.href.startsWith('http') ? '_blank' : undefined}
+            rel={s.href.startsWith('http') ? 'noopener' : undefined}
+            title={s.name}
+          >
+            <img src="/figma/socials.svg" alt="" width="42" height="332" style={`top:-${s.top}px`} />
+            <span class="visually-hidden">{s.name}</span>
+          </a>
+        </li>
       ))
     }
   </ul>
@@ -191,6 +212,11 @@ const processSteps = [
     font-size: 64px;
     font-weight: 800;
     line-height: 64px;
+  }
+
+  /* примусовий перенос перед «разом» вмикається лише на 768–1022px */
+  .lead-br {
+    display: none;
   }
 
   .hero__lead {
@@ -314,6 +340,25 @@ const processSteps = [
 
   .socials__hit:hover {
     background: rgb(255 255 255 / 0.2);
+  }
+
+  /* ---------- Горизонтальний ряд соцмереж (лише 768–1022px, див. нижче) ---------- */
+  .socials-row {
+    display: none;
+  }
+
+  .socials-row__link {
+    position: relative;
+    display: block;
+    width: 42px;
+    height: 42px;
+    overflow: hidden;
+    border-radius: 50%;
+  }
+
+  .socials-row__link img {
+    position: absolute;
+    left: 0;
   }
 
   /* ---------- Рядок навичок ---------- */
@@ -538,6 +583,80 @@ const processSteps = [
 
     .process__step {
       font-size: 14px;
+    }
+  }
+
+  /* 768–1022: заголовок має той самий розмір, що на 1030px (3.65vw ≈ 37.6px) */
+  @media (min-width: 768px) and (max-width: 1022px) {
+    .hero__title {
+      font-size: 37.6px;
+      line-height: 41.4px;
+    }
+
+    /* абзац під заголовком — як на 1030px (мінімум 14px / 21px) */
+    .hero__lead {
+      font-size: 14px;
+      line-height: 21px;
+      /* ширина підібрана так, щоб абзац займав 4 рядки */
+      max-width: 330px;
+    }
+
+    /* «разом, крок за кроком.» — в останньому рядку */
+    .lead-br {
+      display: inline;
+    }
+
+    /* Текст зліва, фото справа — як на 1023+. Фото зменшується за потреби:
+       330 (текст) + 220a (проміжок) + 712a (фото) + 178 (поля й іконки) = 100vw */
+    .first-screen {
+      --a: calc((100vw - 508px) / 932);
+    }
+
+    .hero {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0;
+      padding-right: calc(var(--page-gutter) + 58px);
+    }
+
+    .hero__intro {
+      max-width: none;
+      flex-shrink: 0;
+    }
+
+    .hero__art-col {
+      align-self: center;
+      padding-right: 0;
+      min-height: 0;
+    }
+
+    .art {
+      margin: 0;
+    }
+
+    /* вертикальна колонка іконок ховається; замість неї — горизонтальний ряд під навичками */
+    .socials {
+      display: none;
+    }
+
+    .hero {
+      padding-right: var(--page-gutter);
+    }
+
+    .first-screen {
+      --a: calc((100vw - 450px) / 932);
+    }
+
+    .socials-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 32px 0 0;
+      padding: 0;
+      list-style: none;
     }
   }
 
