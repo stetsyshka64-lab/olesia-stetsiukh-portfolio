@@ -9,12 +9,46 @@ const links = [
 <header class="header">
   <a class="header__logo" href="/">Олеся Стецюх</a>
   <div class="header__right">
-    <nav class="header__nav" aria-label="Основна навігація">
+    <nav class="header__nav" id="site-nav" aria-label="Основна навігація">
       {links.map((link) => <a href={link.href}>{link.label}</a>)}
     </nav>
     <a class="btn header__cta" href="#contacts">Написати</a>
+    <button
+      class="header__burger"
+      type="button"
+      aria-label="Відкрити меню"
+      aria-expanded="false"
+      aria-controls="site-nav"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
 </header>
+
+<script>
+  // Бургер-меню (767px і вужче): відкриває/закриває список Роботи / Про мене / Контакти
+  const burger = document.querySelector<HTMLButtonElement>('.header__burger');
+  const nav = document.querySelector<HTMLElement>('#site-nav');
+
+  function setOpen(open: boolean) {
+    if (!burger || !nav) return;
+    nav.classList.toggle('is-open', open);
+    burger.classList.toggle('is-open', open);
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Закрити меню' : 'Відкрити меню');
+  }
+
+  burger?.addEventListener('click', () => setOpen(!nav?.classList.contains('is-open')));
+  nav?.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setOpen(false);
+  });
+  window.matchMedia('(min-width: 768px)').addEventListener('change', (e) => {
+    if (e.matches) setOpen(false);
+  });
+</script>
 
 <style>
   .header {
@@ -76,15 +110,102 @@ const links = [
     }
   }
 
-  @media (max-width: 720px) {
+  /* Бургер: ховаємо на ≥768, показуємо на ≤767 */
+  .header__burger {
+    display: none;
+  }
+
+  /* 767 і менше: пункти меню ховаємо в бургер (після кнопки «Написати»), відступи 30px */
+  @media (max-width: 767px) {
+    .header__right {
+      gap: 30px;
+    }
+
+    .header__burger {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 6px;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      border: 0;
+      background: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .header__burger span {
+      display: block;
+      width: 30px;
+      height: 2px;
+      background: currentColor;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+
+    .header__burger.is-open span:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+    }
+
+    .header__burger.is-open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .header__burger.is-open span:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+    }
+
     .header__nav {
       display: none;
+      position: absolute;
+      z-index: 3;
+      top: calc(100% + 30px);
+      right: var(--page-gutter);
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+      padding: 30px;
+      border-radius: 2px;
+      background: var(--color-pink);
     }
+
+    .header__nav.is-open {
+      display: flex;
+    }
+  }
+
+  @media (max-width: 720px) {
     .header__logo {
       font-size: 16px;
     }
     .header__cta {
       width: auto;
+    }
+  }
+
+  /* Вузькі телефони: логотип і кнопка меншають, щоб бургер лишився на екрані (відступ до бургера 30px) */
+  @media (max-width: 400px) {
+    .header {
+      gap: 12px;
+    }
+
+    .header__logo {
+      font-size: 14px;
+    }
+
+    .header__cta {
+      padding: 8px 10px;
+      font-size: 12px;
+    }
+  }
+
+  @media (max-width: 340px) {
+    .header__logo {
+      font-size: 12px;
+    }
+
+    .header__cta {
+      padding: 8px;
     }
   }
 </style>
