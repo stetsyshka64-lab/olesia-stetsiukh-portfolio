@@ -67,6 +67,7 @@ const processSteps = [
           <img src="/figma/exclamation.svg" alt="" />
         </div>
         <img class="art__burst" src="/figma/burst.svg" alt="" aria-hidden="true" />
+        <img class="art__burst-m" src="/figma/burst-mobile.svg" alt="" aria-hidden="true" />
         <p class="art__burst-text">Нічого складного, лише робочі рішення!</p>
       </div>
 
@@ -305,6 +306,11 @@ const processSteps = [
     top: calc(380 * var(--a));
     width: calc(367.5 * var(--a));
     height: calc(271.5 * var(--a));
+  }
+
+  /* бомба з макета для екранів ≤500px; на ширших схована */
+  .art > .art__burst-m {
+    display: none;
   }
 
   .art__burst-text {
@@ -865,26 +871,50 @@ const processSteps = [
     }
   }
 
-  /* 500 і менше: «бомба» не менша за 165px завширшки, щоб текст 11px вміщався всередині.
-     Ліва межа бомби (поле сторінки) і нижній край лишаються на місці, росте вправо й угору. */
+  /* 500 і менше: макет Figma 54:258 — фото без кола й «?!», зліва бомба з хвостом унизу.
+     Вся композиція (730×536 одиниць: бомба 0–315.5 + фото 245–730) займає ширину між полями;
+     --s — розмір однієї одиниці макета. */
   @media (max-width: 500px) {
     .art {
-      --wb: max(calc(367.5 * var(--a)), 165px);
+      --s: calc((100vw - 2 * var(--page-gutter)) / 730);
+      width: calc(730 * var(--s));
+      height: calc(536 * var(--s));
+      margin: 0;
     }
 
+    .art__circle,
+    .art__question,
+    .art__exclamation,
     .art__burst {
-      left: calc(-249 * var(--a));
-      top: calc(651.5 * var(--a) - var(--wb) * 0.7388);
-      width: var(--wb);
-      height: calc(var(--wb) * 0.7388);
+      display: none;
     }
 
+    .art__portrait {
+      left: calc(245 * var(--s));
+      top: 0;
+      width: calc(485 * var(--s));
+      height: calc(536 * var(--s));
+      border-radius: calc(34 * var(--s));
+    }
+
+    .art > .art__burst-m {
+      display: block;
+      left: 0;
+      top: calc(207.5 * var(--s));
+      width: calc(315.5 * var(--s));
+      height: calc(306 * var(--s));
+      /* у макеті фігура віддзеркалена по вертикалі */
+      transform: scaleY(-1);
+    }
+
+    /* текст по центру бомби (центр = 153 від її верху) */
     .art__burst-text {
-      left: calc(-249 * var(--a) + var(--wb) * 0.1741);
-      top: calc(651.5 * var(--a) - var(--wb) * 0.7388 + var(--wb) * 0.2503);
-      width: calc(var(--wb) * 0.5796);
-      font-size: 11px;
-      line-height: 14px;
+      left: calc(54 * var(--s));
+      top: calc(361 * var(--s));
+      width: calc(213 * var(--s));
+      transform: translateY(-50%);
+      font-size: max(9px, calc(20 * var(--s)));
+      line-height: max(11.5px, calc(28 * var(--s)));
     }
   }
 
