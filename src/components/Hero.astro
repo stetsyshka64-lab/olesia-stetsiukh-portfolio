@@ -55,7 +55,7 @@ const processSteps = [
           src={portrait}
           alt="Олеся Стецюх"
           widths={[485, 970]}
-          sizes="(max-width: 1100px) 60vw, 485px"
+          sizes="(max-width: 1022px) 60vw, 485px"
           loading="eager"
           fetchpriority="high"
         />
@@ -344,7 +344,7 @@ const processSteps = [
 
   /* Від 1920 і вужче (до 1101) весь перший екран масштабується пропорційно
      макету: --k = ширина вікна / 1920. Жодних стрибків на 1800/1801. */
-  @media (min-width: 1101px) and (max-width: 1920px) {
+  @media (min-width: 1023px) and (max-width: 1920px) {
     .first-screen {
       --k: calc(100vw / 1920);
       --a: var(--k);
@@ -416,6 +416,15 @@ const processSteps = [
   /* Від 1399 і вужче кнопки стоять стовпчиком, тому лівий еліпс (під ними)
      підлаштовуємо так, щоб від кутів кнопок до його краю лишалось ~55px
      (виміряно на 1101/1200/1300/1399: потрібна ширина 656/664/688/720px). */
+  @media (min-width: 1023px) and (max-width: 1100px) {
+    /* кнопки тут вже не зменшуються, тому еліпс трохи росте при звуженні (688px на 1023) */
+    .bg-ellipse--left {
+      --w: calc(688px - (100vw - 1023px) * 0.41);
+      width: var(--w);
+      height: calc(var(--w) * 1.008);
+    }
+  }
+
   @media (min-width: 1101px) and (max-width: 1399px) {
     .bg-ellipse--left {
       --w: calc(420px + 21.5vw);
@@ -424,9 +433,18 @@ const processSteps = [
     }
   }
 
+  /* 1088–1023: заголовок зменшується разом з колонкою (шрифт ≈ 3.65vw),
+     щоб лишатись у три рядки; на 1089 це рівно 40px */
+  @media (min-width: 1023px) and (max-width: 1088px) {
+    .hero__title {
+      font-size: 3.65vw;
+      line-height: 4.015vw;
+    }
+  }
+
   /* Від 1386 і вужче рядок навичок зменшується пропорційно ширині,
      щоб лишатись в один рядок (на 1387 він займає рівно доступну ширину) */
-  @media (min-width: 1101px) and (max-width: 1386px) {
+  @media (min-width: 1023px) and (max-width: 1386px) {
     .process {
       gap: 12px calc(24 * (100vw - 240px) / 1148);
     }
@@ -451,7 +469,7 @@ const processSteps = [
   }
 
   /* ---------- Планшет і телефон: колонка ---------- */
-  @media (max-width: 1100px) {
+  @media (max-width: 1022px) {
     .first-screen {
       --a: min(0.9px, calc((100vw - 2 * var(--page-gutter) - 58px) / 961));
     }
