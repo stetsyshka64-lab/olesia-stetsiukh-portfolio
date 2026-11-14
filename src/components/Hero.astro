@@ -417,11 +417,22 @@ const processSteps = [
      підлаштовуємо так, щоб від кутів кнопок до його краю лишалось ~55px
      (виміряно на 1101/1200/1300/1399: потрібна ширина 656/664/688/720px). */
   @media (min-width: 1023px) and (max-width: 1100px) {
-    /* кнопки тут вже не зменшуються, тому еліпс трохи росте при звуженні (688px на 1023) */
+    /* від 1100 еліпс і кнопки зменшуються пропорційно ширині екрана (657px на 1101) */
     .bg-ellipse--left {
-      --w: calc(688px - (100vw - 1023px) * 0.41);
+      --w: calc(657px * 100vw / 1101px);
       width: var(--w);
       height: calc(var(--w) * 1.008);
+    }
+
+    .hero__actions .btn {
+      gap: calc(6px * 100vw / 1101px);
+      padding: calc(8px * 100vw / 1101px);
+      font-size: calc(12px * 100vw / 1101px);
+    }
+
+    .hero__actions .btn__icon {
+      width: calc(20px * 100vw / 1101px);
+      height: calc(20px * 100vw / 1101px);
     }
   }
 
@@ -430,6 +441,20 @@ const processSteps = [
       --w: calc(420px + 21.5vw);
       width: var(--w);
       height: calc(var(--w) * 1.008);
+    }
+  }
+
+  /* Лівий еліпс на 1023–1200 збільшений (під кнопки), тому верхній і правий
+     відсуваємо, щоб між усіма еліпсами лишалось не менше 30px.
+     Верхній іде вправо-вгору (по лінії від лівого), правий — вправо. */
+  @media (min-width: 1023px) and (max-width: 1210px) {
+    .bg-ellipse--top {
+      left: calc(635 * var(--u) + 0.1888 * (1210px - 100vw));
+      top: calc(-568 * var(--u) - 0.256 * (1210px - 100vw));
+    }
+
+    .bg-ellipse--right {
+      left: calc(1005 * var(--u) + max(0px, 1095px - 100vw));
     }
   }
 
