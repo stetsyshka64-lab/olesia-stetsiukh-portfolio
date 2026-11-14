@@ -78,8 +78,9 @@ const processSteps = [
                 class="socials__hit"
                 style={`top:${s.top}px`}
                 href={s.href}
-                target="_blank"
-                rel="noopener"
+                target={s.href.startsWith('http') ? '_blank' : undefined}
+                rel={s.href.startsWith('http') ? 'noopener' : undefined}
+                title={s.name}
               >
                 <span class="visually-hidden">{s.name}</span>
               </a>
