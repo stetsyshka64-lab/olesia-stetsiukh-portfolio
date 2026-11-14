@@ -14,9 +14,6 @@ const processSteps = [
   'Adaptive design',
   'Prototyping',
 ];
-
-// Вертикальні позиції іконок у socials.svg (42×220): 0, 89, 178.
-const socialOffsets = [0, 89, 178];
 ---
 
 <section class="first-screen">
@@ -73,13 +70,13 @@ const socialOffsets = [0, 89, 178];
       </div>
 
       <div class="socials">
-        <img src="/figma/socials.svg" alt="" width="42" height="220" aria-hidden="true" />
+        <img src="/figma/socials.svg" alt="" width="42" height="332" aria-hidden="true" />
         {
-          socials.map((s, i) =>
+          socials.map((s) =>
             s.href ? (
               <a
                 class="socials__hit"
-                style={`top:${socialOffsets[i]}px`}
+                style={`top:${s.top}px`}
                 href={s.href}
                 target="_blank"
                 rel="noopener"
@@ -299,9 +296,9 @@ const socialOffsets = [0, 89, 178];
     position: absolute;
     z-index: 1;
     right: var(--page-gutter);
-    top: 343px;
+    top: 262px;
     width: 42px;
-    height: 220px;
+    height: 332px;
   }
 
   .socials__hit {
@@ -376,6 +373,8 @@ const socialOffsets = [0, 89, 178];
       position: relative;
       align-self: center;
       padding-right: 58px;
+      /* колонка іконок (332px) вища за ілюстрацію на вузьких екранах */
+      min-height: calc(58 * var(--a) + 332px);
     }
 
     .art {
