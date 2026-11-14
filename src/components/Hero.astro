@@ -612,26 +612,51 @@ const processSteps = [
       --a: calc((100vw - 508px) / 932);
     }
 
+    /* Сітка: у 1-му рядку заголовок+абзац і фото, у 2-му кнопки.
+       Нижній край фото = нижній край абзацу; фото росте вгору й не змінює висоту рядка. */
     .hero {
-      flex-direction: row;
-      align-items: center;
+      display: grid;
+      grid-template-columns: auto auto;
       justify-content: space-between;
+      align-items: start;
       gap: 0;
       padding-right: calc(var(--page-gutter) + 58px);
     }
 
     .hero__intro {
-      max-width: none;
-      flex-shrink: 0;
+      display: contents;
+    }
+
+    .hero__copy {
+      grid-area: 1 / 1;
+    }
+
+    /* кнопки в один ряд (однакової ширини) під абзацом; ряд може заходити під фото:
+       «вибух» закінчується вище за кнопки */
+    .hero__actions {
+      grid-area: 2 / 1 / 3 / 3;
+      margin-top: 96px;
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: 1fr;
+      justify-self: stretch;
+      width: 100%;
     }
 
     .hero__art-col {
-      align-self: center;
+      grid-area: 1 / 2;
+      align-self: end;
+      position: relative;
+      width: calc(712 * var(--a));
+      height: 0;
       padding-right: 0;
       min-height: 0;
     }
 
     .art {
+      position: absolute;
+      left: 0;
+      bottom: 0;
       margin: 0;
     }
 
@@ -645,7 +670,8 @@ const processSteps = [
     }
 
     .first-screen {
-      --a: calc((100vw - 450px) / 932);
+      /* фото росте вгору від нижнього краю абзацу; обмежуємо 0.515, щоб «?» не заходив під шапку */
+      --a: min(0.515px, calc((100vw - 450px) / 932));
     }
 
     .socials-row {
@@ -657,6 +683,58 @@ const processSteps = [
       margin: 32px 0 0;
       padding: 0;
       list-style: none;
+    }
+  }
+
+  /* 768–920: заголовок, абзац і фото зберігають пропорції, як на 920px,
+     і зменшуються разом (--L = 1px на 920, 0.81px на 768) */
+  @media (min-width: 768px) and (max-width: 920px) {
+    .first-screen {
+      --L: calc((100vw - 120px) / 800);
+      --a: calc(0.504 * var(--L));
+    }
+
+    .hero__title {
+      font-size: calc(37.6 * var(--L));
+      line-height: calc(41.4 * var(--L));
+    }
+
+    .hero__lead {
+      font-size: calc(14 * var(--L));
+      line-height: calc(21 * var(--L));
+      max-width: calc(330 * var(--L));
+    }
+
+    /* кнопки теж зменшуються, щоб «вибух» фото не наїжджав на них */    .hero__actions .btn {
+      gap: calc(12 * var(--L));
+      padding: calc(12 * var(--L));
+      font-size: calc(14 * var(--L));
+    }
+
+    .hero__actions .btn__icon {
+      width: calc(32 * var(--L));
+      height: calc(32 * var(--L));
+    }
+  }
+
+  /* 868–768: «вибух» (бомба) з написом не зменшується — лишається розміру, як на 868px
+     (a на 868 ≈ 0.4712). Його центр залишається прив'язаним до фото, як і раніше. */
+  @media (min-width: 768px) and (max-width: 868px) {
+    .art__burst {
+      --a0: 0.4712px;
+      left: calc(-65.25 * var(--a) - 183.75 * var(--a0));
+      top: calc(515.75 * var(--a) - 135.75 * var(--a0));
+      width: calc(367.5 * var(--a0));
+      height: calc(271.5 * var(--a0));
+    }
+
+    .art__burst-text {
+      --a0: 0.4712px;
+      left: calc(-65.25 * var(--a) - 183.75 * var(--a0) + 64 * var(--a0));
+      top: calc(515.75 * var(--a) - 135.75 * var(--a0) + 92 * var(--a0));
+      width: calc(213 * var(--a0));
+      font-size: max(10px, calc(20 * var(--a0)));
+      line-height: max(13px, calc(28 * var(--a0)));
     }
   }
 
