@@ -925,6 +925,30 @@ const processSteps = [
     }
   }
 
+  /* 320 і менше: іконки соцмереж у два ряди в шахматному порядку — три зверху на всю
+     ширину між полями, дві знизу посередині між верхніми (на пів-кроку правіше) */
+  @media (max-width: 320px) {
+    .socials-row {
+      --step: calc((100vw - 2 * var(--page-gutter) - 42px) / 2);
+      display: grid;
+      grid-template-columns: repeat(3, 42px);
+      justify-content: space-between;
+      gap: 20px 0;
+    }
+
+    .socials-row li:nth-child(4) {
+      grid-column: 1;
+    }
+
+    .socials-row li:nth-child(5) {
+      grid-column: 2;
+    }
+
+    .socials-row li:nth-child(n + 4) {
+      transform: translateX(calc(var(--step) / 2));
+    }
+  }
+
   @media (max-width: 600px) {
     /* заголовок +6px (40 → 46); на найвужчих екранах обмежуємо шириною, щоб «до екранів» не переносилось */
     .hero__title {
