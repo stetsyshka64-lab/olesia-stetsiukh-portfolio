@@ -118,7 +118,7 @@ const processSteps = [
             rel={s.href.startsWith('http') ? 'noopener' : undefined}
             title={s.name}
           >
-            <img src="/figma/socials.svg" alt="" width="42" height="332" style={`top:-${s.top}px`} />
+            <img src="/figma/socials.svg" alt="" width="50" height="395" style={`--t:${s.top}`} />
             <span class="visually-hidden">{s.name}</span>
           </a>
         </li>
@@ -350,15 +350,20 @@ const processSteps = [
   .socials-row__link {
     position: relative;
     display: block;
-    width: 42px;
-    height: 42px;
+    width: 50px;
+    height: 50px;
     overflow: hidden;
-    border-radius: 50%;
+    /* без круглого обрізання: LinkedIn і Behance — квадрати зі скругленням, як у макеті */
+    border-radius: 0;
   }
 
+  /* спрайт 42×332 збільшений до 50×395 (×50/42); кожна іконка зсувається на свою позицію */
   .socials-row__link img {
     position: absolute;
     left: 0;
+    top: calc(var(--t) * -1.1905px);
+    width: 50px;
+    height: 395px;
   }
 
   /* ---------- Рядок навичок ---------- */
@@ -678,10 +683,11 @@ const processSteps = [
       position: relative;
       z-index: 1;
       display: flex;
-      justify-content: center;
+      /* на всю ширину сторінки: перша іконка по лівому полю сітки, остання по правому, як кнопки вище */
+      justify-content: space-between;
       gap: 24px;
-      margin: 32px 0 0;
-      padding: 0;
+      margin: 47px 0 0;
+      padding: 0 var(--page-gutter);
       list-style: none;
     }
   }
