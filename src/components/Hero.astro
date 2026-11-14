@@ -925,6 +925,14 @@ const processSteps = [
     }
   }
 
+  /* 400–500: текст у бомбі на 2px більший */
+  @media (min-width: 400px) and (max-width: 500px) {
+    .art__burst-text {
+      font-size: calc(max(9px, 20 * var(--s)) + 2px);
+      line-height: calc(max(11.5px, 28 * var(--s)) + 2px);
+    }
+  }
+
   /* 320 і менше: іконки соцмереж у два ряди в шахматному порядку — три зверху на всю
      ширину між полями, дві знизу посередині між верхніми (на пів-кроку правіше) */
   @media (max-width: 320px) {
