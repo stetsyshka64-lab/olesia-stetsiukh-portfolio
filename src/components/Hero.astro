@@ -348,10 +348,12 @@ const processSteps = [
   }
 
   .socials-row__link {
+    /* --k: збільшення спрайта відносно 42px (1.1905 → 50px; на вузьких екранах 1 → 42px) */
+    --k: 1.1905;
     position: relative;
     display: block;
-    width: 50px;
-    height: 50px;
+    width: calc(42px * var(--k));
+    height: calc(42px * var(--k));
     overflow: hidden;
     /* без круглого обрізання: LinkedIn і Behance — квадрати зі скругленням, як у макеті */
     border-radius: 0;
@@ -361,9 +363,9 @@ const processSteps = [
   .socials-row__link img {
     position: absolute;
     left: 0;
-    top: calc(var(--t) * -1.1905px);
-    width: 50px;
-    height: 395px;
+    top: calc(var(--t) * -1px * var(--k));
+    width: calc(42px * var(--k));
+    height: calc(332px * var(--k));
   }
 
   /* ---------- Рядок навичок ---------- */
@@ -810,6 +812,35 @@ const processSteps = [
     .hero__actions {
       width: 100%;
     }
+
+    /* соцмережі: вертикальна колонка ховається, іконки — горизонтальним рядом під рядком навичок
+       (на всю ширину між полями сторінки, як на 768–1022px) */
+    .socials {
+      display: none;
+    }
+
+    /* місце під колонку іконок біля фото більше не потрібне */
+    .hero__art-col {
+      min-height: 0;
+      padding-right: 0;
+    }
+
+    /* фото разом із «бомбою» (961 одиниця макета: 249 бомба ліворуч + 712 фото) займають
+       рівно ширину між полями сторінки — по краях кнопок */
+    .first-screen {
+      --a: calc((100vw - 2 * var(--page-gutter)) / 961);
+    }
+
+    .socials-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      gap: 0;
+      margin: 47px 0 0;
+      padding: 0 var(--page-gutter);
+      list-style: none;
+    }
   }
 
   /* найвужчі екрани: кнопки трохи компактніші, щоб текст кнопки вміщався між полями */
@@ -831,6 +862,36 @@ const processSteps = [
     .hero__title {
       font-size: 56px;
       line-height: 56px;
+    }
+  }
+
+  /* 500 і менше: «бомба» не менша за 165px завширшки, щоб текст 11px вміщався всередині.
+     Ліва межа бомби (поле сторінки) і нижній край лишаються на місці, росте вправо й угору. */
+  @media (max-width: 500px) {
+    .art {
+      --wb: max(calc(367.5 * var(--a)), 165px);
+    }
+
+    .art__burst {
+      left: calc(-249 * var(--a));
+      top: calc(651.5 * var(--a) - var(--wb) * 0.7388);
+      width: var(--wb);
+      height: calc(var(--wb) * 0.7388);
+    }
+
+    .art__burst-text {
+      left: calc(-249 * var(--a) + var(--wb) * 0.1741);
+      top: calc(651.5 * var(--a) - var(--wb) * 0.7388 + var(--wb) * 0.2503);
+      width: calc(var(--wb) * 0.5796);
+      font-size: 11px;
+      line-height: 14px;
+    }
+  }
+
+  /* вузькі телефони: значки 42px, щоб п'ять штук вмістилися між полями (на 320px: 5×42 < 248) */
+  @media (max-width: 400px) {
+    .socials-row__link {
+      --k: 1;
     }
   }
 
