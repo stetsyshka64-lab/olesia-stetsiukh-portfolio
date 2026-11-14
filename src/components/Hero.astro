@@ -348,8 +348,6 @@ const processSteps = [
     .first-screen {
       --k: calc(100vw / 1920);
       --a: var(--k);
-      /* жовті кола не зменшуємо нижче 0.72 від макета */
-      --u: max(calc(100vw / 1920), 0.72px);
     }
 
     .hero {
@@ -412,6 +410,17 @@ const processSteps = [
       width: calc(42 * var(--k));
       height: calc(42 * var(--k));
       top: calc(var(--t) * var(--k));
+    }
+  }
+
+  /* Від 1399 і вужче кнопки стоять стовпчиком, тому лівий еліпс (під ними)
+     підлаштовуємо так, щоб від кутів кнопок до його краю лишалось ~55px
+     (виміряно на 1101/1200/1300/1399: потрібна ширина 656/664/688/720px). */
+  @media (min-width: 1101px) and (max-width: 1399px) {
+    .bg-ellipse--left {
+      --w: calc(420px + 21.5vw);
+      width: var(--w);
+      height: calc(var(--w) * 1.008);
     }
   }
 
