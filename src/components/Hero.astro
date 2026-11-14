@@ -800,6 +800,30 @@ const processSteps = [
       width: 100%;
       text-align: center;
     }
+
+    /* кнопки на всю ширину екрана (між полями сторінки), одна під одною */
+    .hero__intro,
+    .hero__actions {
+      max-width: none;
+    }
+
+    .hero__actions {
+      width: 100%;
+    }
+  }
+
+  /* найвужчі екрани: кнопки трохи компактніші, щоб текст кнопки вміщався між полями */
+  @media (max-width: 340px) {
+    .hero__actions .btn {
+      gap: 8px;
+      padding: 10px;
+      font-size: 13px;
+    }
+
+    .hero__actions .btn__icon {
+      width: 24px;
+      height: 24px;
+    }
   }
 
   /* 601–767: заголовок на 8px менший (64 → 56px) */
@@ -813,21 +837,22 @@ const processSteps = [
   @media (max-width: 600px) {
     /* заголовок +6px (40 → 46); на найвужчих екранах обмежуємо шириною, щоб «до екранів» не переносилось */
     .hero__title {
-      font-size: min(46px, 12.6vw);
-      line-height: min(50px, 13.8vw);
+      --title-fs: min(46px, calc((100vw - 2 * var(--page-gutter)) / 7.3));
+      font-size: var(--title-fs);
+      line-height: calc(var(--title-fs) * 1.087);
     }
 
     /* абзац завжди в 4 рядки: ширина колонки = 21em, а шрифт підлаштовується під ширину екрана
        (16px на 336px колонки, до 18px на широких, ~13.7px на 320) */
     .hero__lead {
-      --lead-fs: min(18px, calc((100vw - 32px) / 21));
+      --lead-fs: min(18px, calc((100vw - 2 * var(--page-gutter)) / 21));
       font-size: var(--lead-fs);
       line-height: calc(var(--lead-fs) * 1.5);
       max-width: 21em;
     }
 
     .hero__actions {
-      gap: 12px;
+      gap: 20px;
     }
   }
 </style>

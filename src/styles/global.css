@@ -8,13 +8,13 @@
 
   --font-main: 'Unbounded Variable', 'Unbounded', system-ui, sans-serif;
 
-  /* Поля сторінки: 60px на десктопі, 16px на телефоні */
+  /* Поля сторінки: 60px на 601px і ширше (як на 721), 36px на 600px і вужче */
   --page-gutter: 60px;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 600px) {
   :root {
-    --page-gutter: 16px;
+    --page-gutter: 36px;
   }
 }
 
