@@ -738,6 +738,36 @@ const processSteps = [
     }
   }
 
+  /* 768–1022: лівий еліпс (під текстом) росте так, щоб від правого краю тексту
+     до краю еліпса лишалось ≈50px (виміряно: 768→472px, 850→504, 920→536, 990→540, 1022→544).
+     Верхній і правий еліпси трохи відсуваємо, щоб між еліпсами було ≥30px. */
+  @media (min-width: 768px) and (max-width: 920px) {
+    .bg-ellipse--left {
+      --w: calc(454px + 0.421 * (100vw - 768px));
+      width: var(--w);
+      height: calc(var(--w) * 1.008);
+    }
+  }
+
+  @media (min-width: 921px) and (max-width: 1022px) {
+    .bg-ellipse--left {
+      --w: calc(518px + 0.078 * (100vw - 920px));
+      width: var(--w);
+      height: calc(var(--w) * 1.008);
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 1022px) {
+    .bg-ellipse--top {
+      left: calc(635 * var(--u) + 0.118 * max(0px, 1000px - 100vw));
+      top: calc(-568 * var(--u) - 0.16 * max(0px, 1000px - 100vw));
+    }
+
+    .bg-ellipse--right {
+      left: calc(1005 * var(--u) + 0.1 * max(0px, 960px - 100vw));
+    }
+  }
+
   @media (max-width: 600px) {
     .hero__title {
       font-size: 40px;
