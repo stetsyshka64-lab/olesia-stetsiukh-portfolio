@@ -1,10 +1,9 @@
 /* Кольори та шрифт з макета Figma (Portfolio → Portfolio Landing Page) */
 :root {
   --color-ink: #000;
-  --color-bg: #fff;
-  --color-pink: #f8c2c8;
-  --color-pink-dark: #d19ca2;
-  --color-cream: #fbf5d8;
+  --color-bg: #faf8f8;
+  --color-pink: #f4d6dc;
+  --color-red: #720002;
 
   --font-main: 'Unbounded Variable', 'Unbounded', system-ui, sans-serif;
 
@@ -60,32 +59,31 @@ a {
   white-space: nowrap;
 }
 
-/* Кнопки з макета: рожеві плашки з радіусом 2px */
+/* Кнопки з макета: плашки з радіусом 2px; головна темно-червона, друга світло-рожева з рамкою */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 12px;
   padding: 12px;
+  border: 1px solid var(--color-red);
   border-radius: 2px;
   background: var(--color-pink);
+  color: var(--color-ink);
   font-weight: 600;
   font-size: 14px;
   line-height: normal;
   white-space: nowrap;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .btn:hover {
-  background: var(--color-pink-dark);
+  opacity: 0.85;
 }
 
 .btn--dark {
-  background: var(--color-pink-dark);
-}
-
-.btn--dark:hover {
-  background: var(--color-pink);
+  background: var(--color-red);
+  color: var(--color-pink);
 }
 
 .btn__icon {

@@ -1,10 +1,10 @@
 <svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="315.5" height="306" viewBox="0 0 315.5 306" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="Rectangle 83">
-<use xlink:href="#stroke0_0_4" fill="#FBF5D8"/>
+<use xlink:href="#stroke0_0_4" fill="#FFB5C8"/>
 <mask id="stroke1_0_4" fill="white">
 <use xlink:href="#stroke0_0_4"/>
 </mask>
-<path d="M54 25L50 84H5L50 142.5L0 172L50 189L25 247.5L75.5 228.5L81 269L125 247.5L155 306L178.5 247.5L226 289V233.5L282.5 247.5L272 209L315.5 198L279 166.5L315.5 142.5L272 126L315.5 55L253 73L248 0L213 38.5L183.5 0L169 47L125 11L105 55L54 25Z" stroke-width="6" stroke="#FF5A79" mask="url(#stroke1_0_4)"/>
+<path d="M54 25L50 84H5L50 142.5L0 172L50 189L25 247.5L75.5 228.5L81 269L125 247.5L155 306L178.5 247.5L226 289V233.5L282.5 247.5L272 209L315.5 198L279 166.5L315.5 142.5L272 126L315.5 55L253 73L248 0L213 38.5L183.5 0L169 47L125 11L105 55L54 25Z" stroke-width="6" stroke="#720002" mask="url(#stroke1_0_4)"/>
 </g>
 <defs>
 <path id="stroke0_0_4" d="M54 25L105 55L125 11L169 47L183.5 0L213 38.5L248 0L253 73L315.5 55L272 126L315.5 142.5L279 166.5L315.5 198L272 209L282.5 247.5L226 233.5V289L178.5 247.5L155 306L125 247.5L81 269L75.5 228.5L25 247.5L50 189L0 172L50 142.5L5 84H50L54 25Z"/>

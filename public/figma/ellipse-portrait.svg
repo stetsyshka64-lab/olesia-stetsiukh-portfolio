@@ -2,8 +2,8 @@
 <circle id="Ellipse 1" cx="293.5" cy="293.5" r="293.5" fill="url(#paint0_linear_0_23)"/>
 <defs>
 <linearGradient id="paint0_linear_0_23" x1="293.5" y1="0" x2="293.5" y2="587" gradientUnits="userSpaceOnUse">
-<stop offset="0.129808" stop-color="#F8C2C8"/>
-<stop offset="0.875" stop-color="#57242A"/>
+<stop offset="0.129808" stop-color="#F21F49" stop-opacity="0.3"/>
+<stop offset="0.875" stop-color="#720002" stop-opacity="0.6"/>
 </linearGradient>
 </defs>
 </svg>
